@@ -13,6 +13,7 @@ test: check-dependencies
 	@go test -v ./...
 
 build: check-dependencies
+	@go generate ./...
 	@go build .
 
 build-docker:

@@ -1,12 +1,13 @@
-//go:generate go run github.com/deepmap/oapi-codegen/cmd/oapi-codegen --config=models.cfg.yaml ../openapi.yaml
-//go:generate go run github.com/deepmap/oapi-codegen/cmd/oapi-codegen --config=server.cfg.yaml ../openapi.yaml
+//go:generate go run github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen --config=models.cfg.yaml ../openapi.yaml
+//go:generate go run github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen --config=server.cfg.yaml ../openapi.yaml
 
 package api
 
 import (
-	"github.com/Kong/KongAir/flight-data/routes/api/models"
-	"github.com/labstack/echo/v4"
 	"net/http"
+
+	"github.com/KongAirlines/routes/api/models"
+	"github.com/labstack/echo/v4"
 )
 
 type RouteService struct {
@@ -37,11 +38,11 @@ func NewRouteService() *RouteService {
 	return &rv
 }
 
-func (s *RouteService) GetHealth(ctx echo.Context) error {
+func (s *RouteService) GetHealthStatus(ctx echo.Context) error {
 	return ctx.JSON(http.StatusOK, map[string]string{"status": "OK"})
 }
 
-func (s *RouteService) GetRoutes(ctx echo.Context, params models.GetRoutesParams) error {
+func (s *RouteService) GetAllRoutes(ctx echo.Context) error {
 	if ctx.Request().Header.Get("x-vip") == "true" {
 		allRoutes := append(s.Routes, s.PrivateRoutes...)
 		return ctx.JSON(200, allRoutes)
@@ -50,7 +51,7 @@ func (s *RouteService) GetRoutes(ctx echo.Context, params models.GetRoutesParams
 	return ctx.JSON(200, s.Routes)
 }
 
-func (s *RouteService) GetRoute(ctx echo.Context, id string) error {
+func (s *RouteService) GetRouteById(ctx echo.Context, id string) error {
 	routes := s.Routes
 	if ctx.Request().Header.Get("x-vip") == "true" {
 		routes = append(routes, s.PrivateRoutes...)
