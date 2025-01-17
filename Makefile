@@ -6,13 +6,13 @@ check-dependencies:
 	@$(call check-dependency,go)
 	@$(call check-dependency,jq)
 	@$(call check-dependency,deck)
-	@$(call check-dependency,cloudflared)
 	@$(call check-dependency,docker)
 
 test: check-dependencies
 	@go test -v ./...
 
 build: check-dependencies
+	@go generate ./...
 	@go build .
 
 build-docker:

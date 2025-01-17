@@ -5,8 +5,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/Kong/KongAir/flight-data/routes/api"
-	"github.com/Kong/KongAir/flight-data/routes/api/models"
+	"github.com/KongAirlines/routes/api"
 	"github.com/labstack/echo/v4"
 	"github.com/stretchr/testify/assert"
 )
@@ -28,7 +27,7 @@ func TestGetRoutes(t *testing.T) {
 	ctx := e.NewContext(req, rec)
 
 	// Call the GetRoutes function
-	err := routeService.GetRoutes(ctx, models.GetRoutesParams{})
+	err := routeService.GetAllRoutes(ctx)
 
 	// Assert that no error occurred
 	assert.NoError(t, err)
@@ -36,4 +35,3 @@ func TestGetRoutes(t *testing.T) {
 	// Assert that the response status code is 200
 	assert.Equal(t, http.StatusOK, rec.Code)
 }
-

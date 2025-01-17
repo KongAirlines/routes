@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/Kong/KongAir/flight-data/routes/api"
+	"github.com/KongAirlines/routes/api"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
