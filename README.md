@@ -3,6 +3,10 @@
 Provides the KongAir routing information including flight origin and destination codes.
 The API also provdes average duration of flight time for each route.
 
+### Security
+
+See [Security](SECURITY.md) for information on how to report security vulnerabilities.
+
 ### Specification
 
 The API specification can be found in the [openapi.yaml](openapi.yaml) file.
